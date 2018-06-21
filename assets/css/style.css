@@ -1,0 +1,25 @@
+body {
+    background-image: url("../images/PixarBackground.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+}
+
+#start-button {
+    width: 150px;
+    height: 75px;
+}
+
+#main-container {
+
+    opacity: 50%;
+    background-color: gold;
+    width: 75%;
+    height: 75%;
+
+}
+
+h1 {
+    text-align: center;
+}
+
+
