@@ -37,3 +37,7 @@ h2 {
 #correct-counter, #incorrect-counter, #blank-counter {
     background-color: yellow;
 }
+
+#start-button {
+    position: center;
+}
