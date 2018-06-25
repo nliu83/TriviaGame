@@ -2,14 +2,12 @@
 $(document).ready(function() {
 
     $("#submit-button").hide();
-    $('#tryagain-button').hide();
-    
-    // creating variables/object for questions
+    $('#Timer').html(timer);
     
     var pixarTrivia = [{
     
         question: "Who designed the costumes for the Incredibles?", 
-        possibleAnswers: ["Violet", "Enda Mode", "Jack Jack", "Syndrome"], 
+        possibleAnswers: ["Violet", "Edna Mode", "Jack Jack", "Syndrome"], 
         answer: "Edna Mode",
         charImg: "../images/EdnaMode.jpg",
         name: "The Incredibles"
@@ -88,149 +86,247 @@ $(document).ready(function() {
     
     }];
     
+    var timer;
+
     var trivia = {
-    
-        counter: 0, 
-        correct: 0, 
-        wrong: 0,
-        seconds:0,
-        answered: false,
-        unanswered: 0,
-        
-    
-    
-        loadQuestions: function() {
-    
-    
-            for (var i = 0; i < pixarTrivia.length; i++) {
-    
-            $('#trivia-questions').append('<h3>' + pixarTrivia[i].question + '</h3>'); 
-            
-            for (var j = 0; j <= 3; j++) {
-    
-            //$('#trivia-questions').append('<button class="answer-button" id="button-' + j +'" data-name="' + pixarTrivia[i].possibleAnswers[j] + '">' + pixarTrivia[i].possibleAnswers[j] + '</button>');
-    
-             $("#trivia-questions").append('<input type="radio" value="'+ pixarTrivia[i].possibleAnswers[j]+'"><label>'+ pixarTrivia[i].possibleAnswers[j]+'</label><br>');
-          
-            //name="Radio1"
-    
-            };
-    
-            };
-    
-        }, 
-    
+                                                                    
+        correct: 0,
+        incorrect: 0,
+        userSelect: '',
+        counter: 120,
+
         countdown: function() {
-            
-            var intervalID; 
-            setInterval(function() {
-    
-                seconds--;
-    
-                $('#Timer').html(seconds);
-    
-                if (seconds <= 0) {
-    
-                    clearInterval(time);
-                    
-                    trivia.correct = 0;
-                    trivia.wrong = 0;
-                    trivia.unanswered = 0;
-    
-                for (var i = 0; i < pixarTrivia.length; i++){
-                    
-                    
-                    if ($('input:radio[name="' + pixarTrivia[i].possibleAnswers + '"]:checked').val() === pixarTrivia[i].answer) {
-                        console.log(pixarTrivia[k].possibleAnswers)
-                        trivia.correct++;
-                    }
-                    else if ($('input:radio[name="' + pixarTrivia[i].possibleAnswers + '"]:checked').val() !== pixarTrivia[i].answer){
-                        trivia.wrong++;
-                        console.log("You are wrong");
-                    };
-                    
-                }
-                    $('#correct-counter').append(trivia.correct);
-                    $('#incorrect-counter').append(trivia.wrong);
-                    $('#blank-counter').append(unanswered);
-    
-                    clearInterval(timer);
-                    return;
-    
+            trivia.counter--;
+            $("#counter-number").html(trivia.counter);
+            if (trivia.counter === 0) {
+                console.log(timer);
+              console.log("TIME UP");
+              trivia.displayResults();
             }
-                }, 1000);
+          },
+        
+
+        displayQuestions: function () {
+
+            timer = setInterval(trivia.countdown, 1000);
+
+            for (var i = 0; i < pixarTrivia.length; i++) {
+
+                var questionArr = pixarTrivia[i].question;
+                
+                var displayQuestions = $('<div>');
+
+                displayQuestions.addClass('questionsDisplay');
+
+                displayQuestions.attr('display-question', questionArr);
+
+                displayQuestions.text(questionArr);
+
+                $('#trivia-questions').append(displayQuestions);
+        
+                    for (var j = 0; j < 4; j++) {
+
+                    var answerArr = pixarTrivia[i].possibleAnswers[j];
+                    
+                    var displayAnswers = $('<input type="radio" name= "question-' + i +
+                    '" value= "' + pixarTrivia[i].possibleAnswers[j] + '"">' +'<label>'+ pixarTrivia[i].possibleAnswers[j] + '</label>');
+        
+
+                    displayAnswers.addClass('answerchoices-btn');
+
+                    displayAnswers.attr('display-answers', answerArr);
+
+                    displayAnswers.text(answerArr);
+
+                    $('#trivia-questions').append(displayAnswers);
+
+                    $('#submit-button').show();
+       
+                    };
+        
+
+            };
+
+        },
+
+
+        correctQuiz: function () {
+
+        
+            $.each($("input[name='question-0']:checked"), function() {
+                
+                if ($(this).val() === pixarTrivia[0].answer) {
+                    
+                trivia.correct++;
+                console.log('correct: ' + trivia.correct);
+                }
+                else {
+                trivia.incorrect++;
+                console.log('incorrect: ' + trivia.incorrect);
+                }
+            });
+        
+
+            $.each($("input[name='question-1']:checked"), function() {
+                
+                if ($(this).val() === pixarTrivia[1].answer) {
+                    
+                trivia.correct++;
+                console.log('correct: ' + trivia.correct);
+                }
+                else {
+                trivia.incorrect++;
+                console.log('incorrect: ' + trivia.incorrect);
+                }
+            });
+
+            $.each($("input[name='question-2']:checked"), function() {
+
+                
+                if ($(this).val() === pixarTrivia[2].answer) {
+                    
+                trivia.correct++;
+                console.log('correct: ' + trivia.correct);
+                }
+                else {
+                trivia.incorrect++;
+                console.log('incorrect: ' + trivia.incorrect);
+                }
+            });
+
+            $.each($("input[name='question-3']:checked"), function() {
+                
+                if ($(this).val() === pixarTrivia[3].answer) {
+                    
+                trivia.correct++;
+                console.log('correct: ' + trivia.correct);
+                }
+
+                else {
+                trivia.incorrect++;
+                console.log('incorrect: ' + trivia.incorrect);
+                }
+
+
+
+            });
+
+            $.each($("input[name='question-4']:checked"), function() {
+                
+                if ($(this).val() === pixarTrivia[4].answer) {
+                    
+                trivia.correct++;
+                console.log('correct: ' + trivia.correct);
+                }
+                else {
+                trivia.incorrect++;
+                console.log('incorrect: ' + trivia.incorrect);
+                }
+            });
+
+            $.each($("input[name='question-5']:checked"), function() {
+
+                
+                if ($(this).val() === pixarTrivia[5].answer) {
+                    
+                trivia.correct++;
+                console.log('correct: ' + trivia.correct);
+                }
+                else {
+                trivia.incorrect++;
+                console.log('incorrect: ' + trivia.incorrect);
+                }
+            });
+
+            $.each($("input[name='question-6']:checked"), function() {
+
+                
+                if ($(this).val() === pixarTrivia[6].answer) {
+                    
+                trivia.correct++;
+                console.log('correct: ' + trivia.correct);
+                }
+                else {
+                trivia.incorrect++;
+                console.log('incorrect: ' + trivia.incorrect);
+                }
+            });
+
+            $.each($("input[name='question-7']:checked"), function() {
+                
+                if ($(this).val() === pixarTrivia[7].answer) {
+                    
+                trivia.correct++;
+                console.log('correct: ' + trivia.correct);
+                }
+                else {
+                trivia.incorrect++;
+                console.log('incorrect: ' + trivia.incorrect);
+                }
+            });
+
+            $.each($("input[name='question-8']:checked"), function() {
+
+                
+                if ($(this).val() === pixarTrivia[8].answer) {
+                    
+                trivia.correct++;
+                console.log('correct: ' + trivia.correct);
+                }
+                else {
+                trivia.incorrect++;
+                console.log('incorrect: ' + trivia.incorrect);
+                }
+            });
+
+            $.each($("input[name='question-9']:checked"), function() {
+                
+                if ($(this).val() === pixarTrivia[9].answer) {
+                    
+                trivia.correct++;
+                console.log('correct: ' + trivia.correct);
+                }
+                else {
+                trivia.incorrect++;
+                console.log('incorrect: ' + trivia.incorrect);
+                }
+            });
+
     
-            },
+        },
+
+        displayResults: function () {
+
+    
+            clearInterval(timer);
+            $('#correct-counter').html('<h2>Correct: ' + trivia.correct + '</h2>');
+            $('#incorrect-counter').html('<h2>Correct: ' + trivia.correct + '</h2>');
+
+
+        }
+    };
+
+        $('#submit-button').on('click', function() {
             
+            trivia.correctQuiz();
+            trivia.displayResults()
+            $('#trivia-questions').hide();
+            $("#submit-button").hide();
+            trivia.countdown();
+
+        });
+   
+        $('#start-button').on('click', function(){
+            trivia.displayQuestions();
+            $(this).hide();
+            $('#Timer').html(timer);
+
+        });
+
         
     
-        timesUp: function() {
-            trivia.unanswered++;
-            $("#trivia-questions").html('<h2>Time is up!<h2>');
-        },
-    
-        displayResults: function() {
-            clearInterval();
-            $('#correct-counter').append('<h3>Correct: ' + trivia.correct + '</h3>');
-            $('#incorrect-counter').append('<h3>Wrong: ' + trivia.wrong + '</h3>');
-            $('#blank-counter').append('<h3>Unanswered: ' + trivia.unanswered + '</h3>');
-        }, 
-    
-        countdown: function(seconds) {
-            setInterval(function(){
-                 seconds--;
-                 //if seconds <= 0 then show end screen
-                $('#Timer').html(seconds);     
-            },1000);
-            
-    
-        }, 
-    };
-    
-    $('#start-button').on('click', function() {
-    
-        $(this).remove();
-        trivia.countdown(60);
-        trivia.loadQuestions();
-        $("#submit-button").show();
-    
-    });
-    
-    $('#submit-button').on('click', function() {
-    
-        console.log("Clicked");
-        trivia.correct = 0;
-        trivia.wrong = 0;
-        trivia.unanswered = 0;
-    
-        for (var i = 0; i < pixarTrivia.length; i++){
-                    
-                    
-            if ($('input:radio[name="' + pixarTrivia[i].possibleAnswers + '"]:checked').val() === pixarTrivia[i].answer) {
-                console.log(pixarTrivia[k].possibleAnswers)
-                trivia.correct++;
-            }
-            else if ($('input:radio[name="' + pixarTrivia[i].possibleAnswers + '"]:checked').val() !== pixarTrivia[i].answer){
-                trivia.wrong++;
-                console.log("You are wrong");
-            };
-            
-        };
-    
-        $('#trivia-questions').hide();
-        trivia.displayResults();
-        $("#submit-button").hide();
-        $('#tryagain-button').show();
-    });
-    
-    $('#tryagain-button').on('click', function() {
-        $('#trivia-questions').show();
-        trivia.correct = 0;
-        trivia.wrong = 0;
-        trivia.unanswered = 0;
-    
-    
-    });
+   
+   
     
     });
 

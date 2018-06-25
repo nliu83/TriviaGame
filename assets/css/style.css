@@ -3,6 +3,7 @@ body {
     background-repeat: no-repeat;
     background-size: 100%; 
     
+    
 }
 
 #start-button {
@@ -12,7 +13,7 @@ body {
 
 #trivia-questions {
 
-    opacity: 0%;
+    opacity: 0.8;
     background-color: gold;
     width: 75%;
     height: 75%;
@@ -20,7 +21,7 @@ body {
     border-left: 25%;
     left: 25px;
 
-}
+} 
 
 h1 {
     text-align: center;
@@ -36,8 +37,31 @@ h2 {
 
 #correct-counter, #incorrect-counter, #blank-counter {
     background-color: yellow;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+
 }
 
 #start-button {
     position: center;
 }
+
+#answerbtn {
+    border-style: solid;
+}
+
+.questionsDisplay {
+
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.answerchoices-btn{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding: 10px;
+    margin: 5px;
+}
+
