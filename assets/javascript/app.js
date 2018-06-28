@@ -99,7 +99,7 @@ $(document).ready(function() {
             trivia.counter--;
             $("#counter-number").html(trivia.counter);
             if (trivia.counter === 0) {
-                console.log(timer);
+                console.log(trivia.counter);
               console.log("TIME UP");
               trivia.displayResults();
             }
@@ -108,8 +108,9 @@ $(document).ready(function() {
 
         displayQuestions: function () {
 
-            timer = setInterval(trivia.countdown, 1000);
+            //timer = setInterval(trivia.countdown, 1000);
 
+            
             for (var i = 0; i < pixarTrivia.length; i++) {
 
                 var questionArr = pixarTrivia[i].question;
@@ -300,7 +301,7 @@ $(document).ready(function() {
     
             clearInterval(timer);
             $('#correct-counter').html('<h2>Correct: ' + trivia.correct + '</h2>');
-            $('#incorrect-counter').html('<h2>Correct: ' + trivia.correct + '</h2>');
+            $('#incorrect-counter').html('<h2>Incorrect: ' + trivia.incorrect + '</h2>');
 
 
         }
